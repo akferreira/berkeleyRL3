@@ -41,7 +41,6 @@ class QLearningAgent(ReinforcementAgent):
     def __init__(self, **args):
         "You can initialize Q-values here..."
         ReinforcementAgent.__init__(self, **args)
-        print(self.getLegalActions('TERMINAL_STATE'))
 
         self.QValue = util.Counter()
 
@@ -192,14 +191,19 @@ class ApproximateQAgent(PacmanQAgent):
           where * is the dotProduct operator
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        features = self.featExtractor.getFeatures(state, action)
+        return sum([features[item]*self.weights[item] for  item in features])
 
     def update(self, state, action, nextState, reward):
         """
            Should update your weights based on transition
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        delta = reward + self.discount*self.getValue(nextState) - self.getQValue(state, action)
+        features = self.featExtractor.getFeatures(state, action)
+
+        for item in features:
+          self.weights[item] = self.weights[item] + self.alpha*delta * features[item]
 
     def final(self, state):
         "Called at the end of each game."
