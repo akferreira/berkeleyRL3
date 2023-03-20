@@ -42,7 +42,7 @@ def question3b():
 
 def question3c():
     # Prefer the distant exit (+10), risking the cliff (-10)
-    answerDiscount = 0.95
+    answerDiscount = 0.9
     answerNoise = 0
     answerLivingReward = -1
     return answerDiscount, answerNoise, answerLivingReward
@@ -58,7 +58,7 @@ def question3d():
 
 def question3e():
     # Avoid both exits and the cliff (so an episode should never terminate)
-    answerDiscount = 0.95
+    answerDiscount = 0.9
     answerNoise = 0
     answerLivingReward = 1
     return answerDiscount, answerNoise, answerLivingReward
